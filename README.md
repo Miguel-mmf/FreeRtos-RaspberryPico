@@ -60,3 +60,4 @@ cd FreeRtos-RaspberryPico-guia-utilizacao-pt-br && chmod +x picoSetup.sh &&\
 Referência: https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf
 
 ## Tutorial 2: Instalação e Compilação do Primeiro Programa utilizando o Kernel do FreeRtos
+se alguém puder colaborar e completar baseado no script .sh, será bem vindo(a) ;)
