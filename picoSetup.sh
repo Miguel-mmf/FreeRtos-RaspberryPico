@@ -26,34 +26,34 @@ function setup_pico_sdk {
 }
 
 function install_opencd {
-  sudo apt install automake autoconf build-essential texinfo libtool libftdi-dev libusb-1.0-0-dev -y &&\
-  cd ~/pico && git clone https://github.com/raspberrypi/openocd.git --branch rp2040 --recursive --depth=1 &&\
-  cd ~/pico/openocd && ./bootstrap && ./configure --enable-ftdi --enable-sysfsgpio --enable-bcm2835gpio && make -j4 && sudo make install
+  sudo apt install automake autoconf build-essential texinfo libtool libftdi-dev libusb-1.0-0-dev -y && echo "STEP 1 DONE" &&\
+  cd ~/pico && git clone https://github.com/raspberrypi/openocd.git --branch rp2040 --recursive --depth=1 && echo "STEP 2 DONE" &&\
+  cd ~/pico/openocd && ./bootstrap && ./configure --enable-ftdi --enable-sysfsgpio --enable-bcm2835gpio && make -j4 && sudo make install && echo "STEP 3 DONE"
 }
 
 function debug_with_swd {
-  cd ~/pico/pico-examples && rm -rf build && mkdir build && cd build && export PICO_SDK_PATH=~/pico/pico-sdk &&\
-  cmake -DCMAKE_BUILD_TYPE=Debug .. && cd hello_world/serial && make -j4 &&\
-  sudo apt install gdb-multiarch
+  cd ~/pico/pico-examples && rm -rf build && mkdir build && cd build && export PICO_SDK_PATH=~/pico/pico-sdk && echo "STEP 1 DONE" &&\
+  cmake -DCMAKE_BUILD_TYPE=Debug .. && cd hello_world/serial && make -j4 && echo "STEP 2 DONE" &&\
+  sudo apt install gdb-multiarch && echo "STEP 3 DONE"
 }
 
 function debug_with_vscode {
-  sudo apt update && sudo apt install code -y &&\
-  code --install-extension marus25.cortex-debug && code --install-extension ms-vscode.cmake-tools && code --install-extension ms-vscode.cpptools &&\
-  code ~/pico/pico-examples/ &&\
-  export PICO_SDK_PATH=~/pico/pico-sdk &&\
-  cd ~/pico/pico-examples && mkdir .vscode && cp ide/vscode/launch-raspberrypi-swd.json .vscode/launch.json && cp ide/vscode/settings.json .vscode/settings.json 
+  sudo apt update && sudo apt install code -y && echo "STEP 1 DONE" &&\
+  code --install-extension marus25.cortex-debug && code --install-extension ms-vscode.cmake-tools && code --install-extension ms-vscode.cpptools && echo "STEP 2 DONE" &&\
+  code ~/pico/pico-examples/ && echo "STEP 3 DONE" &&\
+  export PICO_SDK_PATH=~/pico/pico-sdk && echo "STEP 4 DONE" &&\
+  cd ~/pico/pico-examples && mkdir .vscode && cp ide/vscode/launch-raspberrypi-swd.json .vscode/launch.json && cp ide/vscode/settings.json .vscode/settings.json && echo "STEP 5 DONE"
 }
 
 function picoprobe_setup {
   # OBS.: INSTALLING GIT-LFS
-  #curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash && sudo apt-get install git-lfs && git lfs install && echo "STEP 1 DONE" &&\
-  #install_opencd &&\ && echo "STEP 1 DONE" &&\
-  #cd ~/pico && git clone https://github.com/raspberrypi/picoprobe.git --depth 1 && cd picoprobe && echo "STEP 2 DONE" &&\
-  #git submodule update --init && mkdir build && cd build && echo "STEP 3 DONE" &&\
-  cd ~/pico/picoprobe/build && export PICO_SDK_PATH=~/pico/pico-sdk && cmake .. && make -j4 && echo "STEP 4 DONE" &&\
+  curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash && sudo apt-get install git-lfs && git lfs install && echo "STEP 1 DONE" &&\
+  install_opencd &&\ && echo "STEP 2 DONE" &&\
+  cd ~/pico && git clone https://github.com/raspberrypi/picoprobe.git --depth 1 && cd picoprobe && echo "STEP 3 DONE" &&\
+  git submodule update --init && mkdir build && cd build && echo "STEP 4 DONE" &&\
+  cd ~/pico/picoprobe/build && export PICO_SDK_PATH=~/pico/pico-sdk && cmake .. && make -j4 && echo "STEP 5 DONE" &&\
   # using Picoprobe with OpenCD
-  src/openocd -f interface/cmsis-dap.cfg -c "adapter speed 5000" -f target/rp2040.cfg -s tcl && target remote localhost:3333 && echo "STEP 5 DONE"
+  src/openocd -f interface/cmsis-dap.cfg -c "adapter speed 5000" -f target/rp2040.cfg -s tcl && target remote localhost:3333 && echo "STEP 6 DONE"
 }
 
 while true; do
