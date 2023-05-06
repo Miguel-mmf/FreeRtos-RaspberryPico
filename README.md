@@ -50,9 +50,13 @@ E pronto, no código acima compilamos o exemplo de *blink* (piscar) um LED, ness
 
 Se atente que o arquivo gerado foram: *blink.elf* (utilizado para debugação) e o *blink.uf2*, este último que deve ser arrastado para a rasberry que com a ajuda do SDK deve aparecer como um dispositivo de Pendrive bastando-se apenas colocar o arquivo blink.uf2 dentro dele que ele irá reiniciar automaticamente e iniciar as instruções. É interessante notar que esse exemplo ainda não roda o FreeRtos propriamente dito. Caso você esteja em ambiente não gráfico pode-se montar a comunicação a partir de um MSB, essa etapa é melhor descrita na própria documentação disposta abaixo.
 
-O Script contendo toda a sequência de comandos para facilitar a operação está disponibilizado em: 
+O Script contendo toda a sequência comandos está no repositório e nomeado por picoSetup.sh, para executá-lo você precisa fazer o download do arquivo e torná-lo executável:
+```sh
+git clone https://github.com/joaoguilhermeS/FreeRtos-RaspberryPico-guia-utilizacao-pt-br &&\
+cd FreeRtos-RaspberryPico-guia-utilizacao-pt-br && chmod +x picoSetup.sh &&\
+./picoSetup.sh # choice the option 1 ;)
+```
 
 Referência: https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf
 
 ## Tutorial 2: Instalação e Compilação do Primeiro Programa utilizando o Kernel do FreeRtos
-
